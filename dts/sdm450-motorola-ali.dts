@@ -1,0 +1,84 @@
+// SPDX-License-Identifier: GPL-2.0-only
+
+/dts-v1/;
+
+/include/ "msm8953.dtsi"
+
+/ {
+  model = "ali";
+  compatible = "qcom,sdm450-ali", "qcom,sdm450-moto", "qcom,sdm450", "lk2nd,device";
+  qcom,msm-id = <0x152 0x00>;
+  qcom,board-id = <0x41 0xb1a0 0x42 0xb1a0>, <0x43 0xc100>, <0x42 0xb1b0>, <0x43 0xc200 0x44 0xc200>, <0x42 0xb200 0x43 0xb200>;
+  qcom,pmic-id = <0x10016 0x10011 0x00 0x00>, <0x10016 0x10011 0x00 0x00>, <0x10016 0x20037 0x00 0x00>, <0x10016 0x20040 0x00 0x00>;
+  interrupt-parent = <0x01>;
+  channel-id-map = "acg\0amxbr\0amxpr\0amxmx\0amxcl\0amxar\0amxla\0amxpe\0amxco\0tefbr\0tefmx\0tefar\0tefcl\0tefpe\0tefco\0perar\0entcl\0iusmx\0niibr\0niicl\0niimx\0niipe\0oibr\0timbr\0tigco\0retbr\0retar\0retla\0retcl\0tefla\0retla1st\0tefunl\0tigca\0tigca1st\0retmx\0attmx\0womcl\0avaco\0retpe\0openla\0opencl\0openmx\0altmx\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0reteu\0retgb\0retfr\0retes\0retie\0retde\0vfgb\0vfde\0vffr\0o2gb\0o2de\0orafr\0bouyfr\0eegb\0tescogb\0yoigo\0oraes\0retapac\0retmea\0vfit\0vfes\0vfeu\03gb\0tescoie\0altfr\03ie\0altpt\0timit\0retma\0windit\0vfhu\0vfro\0telhu\0playpl\0oraeu\0dteu\0teleu\0pluspl\0dtpl\0tefes\0altice\0vipeu\0veoneu\0openeu\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0retca\0bwaca\0tkpca\0vzw\0att\0tmo\0sprint\0repw\0aio\0cricket\0cc\0usc\0tracfone\0retus\0metropcs\0rcica\0wndca\0dmc\0bby\0amz\0acg\0lra\0comcast\0fi\0undefined\0undefined\0charter\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0retin\0retcn\0telstra\0vfau\0amzin\0jioin\0airin\0retid\0cmcc\0ctcn\0cucn\0retmm\0gt4gtw\0retth\0retru\0trueth\0smarthk\0mobilpk\0retsea\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined\0undefined";
+
+	// Bootloader won't continue if it can't delete some nodes from below
+	soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges = <0x0 0x0 0x0 0xffffffff>;
+
+		qcom,memshare {
+			qcom,client_4 {
+				qcom,peripheral-size = <0x6000000>;
+			};
+		};
+	};
+
+	reserved-memory {
+		lk_region@0 {
+			linux,reserve-contiguous-region;
+			linux,reserve-region;
+			linux,remove-completely;
+			no-map;
+			reg = <0x0 0x8f600000 0x0 0x300000>;
+			label = "lk_mem";
+		};
+	};
+
+	// Bootloader won't continue if it can't delete some nodes from below
+	soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges = <0x0 0x0 0x0 0xffffffff>;
+
+		qcom,memshare {
+			qcom,client_4 {
+				qcom,peripheral-size = <0x6000000>;
+			};
+		};
+	};
+
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		sec_debug_region@0 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0x0 0x85000000 0x0 0x800000>;
+		};
+
+		sec_debug_low_region@0 {
+			compatible = "removed-dma-pool";
+			no-map;
+			reg = <0x0 0x85000000 0x0 0x400000>;
+		};
+
+		lk_region@0 {
+			linux,reserve-contiguous-region;
+			linux,reserve-region;
+			linux,remove-completely;
+			no-map;
+			reg = <0x0 0x8f600000 0x0 0x300000>;
+			label = "lk_mem";
+		};
+
+		modem_shared_mem_region@0x93000000 {
+			reg = <0x0 0x93000000 0x0 0x6000000>;
+		};
+
+	};
+};
