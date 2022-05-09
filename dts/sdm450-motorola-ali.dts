@@ -21,7 +21,7 @@
 		qcom,mdss_dsi_mot_tianma_565_1080p_vid_v0 {
 			compatible = "motorola,ali-panel-tianma";
 		};
-  }
+  };
   
   // TODO: this may not be necessary...
 	soc {
